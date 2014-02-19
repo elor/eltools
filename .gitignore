@@ -1,0 +1,17 @@
+*
+!*.sh
+!.gitignore
+!AUTHORS
+!ChangeLog
+!configure.ac
+!COPYING
+!LICENSE
+!Makefile.am
+!NEWS
+!qdel
+!qdone.sh
+!qstat
+!qsub
+!README
+!showq
+!simredirect.sh
