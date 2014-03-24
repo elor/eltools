@@ -2,7 +2,7 @@
 #
 # pushes all repos to all remotes
 
-for dir in */.git; do
+[ "`echo */.git`" != "*/.git" ] && for dir in */.git; do
   pushd $dir>/dev/null
   for remote in `git remote`; do
     echo "$PWD $remote"
@@ -11,7 +11,7 @@ for dir in */.git; do
   popd>/dev/null
 done
 
-for file in */pushall.sh; do
+[ "`echo */pushall.sh`" != "*/pushall.sh" ] && for file in */pushall.sh; do
   pushd `dirname $file`
   ./pushall.sh
   popd
