@@ -2,7 +2,7 @@
 # 
 #PBS -l nodes=1:ppn=48
 #PBS -N lammps-mpi
-#PBS -m ae
+#PBS -m a
 #PBS -j oe
 
 [ -n "$PBS_O_WORKDIR" ] && cd "$PBS_O_WORKDIR"
