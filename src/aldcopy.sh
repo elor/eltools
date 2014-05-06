@@ -7,6 +7,6 @@ cd "$src"
 
 cp -r "`which parsivald`" input lmpout options.cfg pyprefs "$dst"
 
-mkdir "$dst/Scripts"
+mkdir -p "$dst/Scripts"
 cp -r Scripts/debugsimulation.sh Scripts/runsimulation.sh Scripts/startworkers.sh Scripts/screenlocal.sh Scripts/localjob.sh "$dst/Scripts/"
 
