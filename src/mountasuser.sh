@@ -60,8 +60,22 @@ if ! [ -b "$device" ]; then
   esac
 fi
 
+fulldevice=$(dirname `readlink -f $device`/`basename $device`)
+if [ -z "$fulldevice" ]; then
+  echo "cannot find absolute path of $device" >&2
+  exit 1
+fi
+
+oldpath=`mount | grep "^$fulldevice" | cut -d\  -f3 | xargs`
+
+if [ -n "$oldpath" ]; then
+  echo "$device ($fulldevice) is already mounted as:" >&2
+  echo "  $oldpath" >&2
+  exit 1
+fi
+
 # default to a random id
-id=`sed -e 's ^/  g' -e 's / _ g' <<< $device`
+id=`sed -e 's \\\\ / g' -e 's ^/  g' -e 's / _ g' <<< $device`
 
 if [ "`dirname "$device"`" == /dev ]; then
   uuid=`ls -l /dev/disk/by-uuid | grep "$(basename $device)$" | xargs | cut -d\  -f9`
