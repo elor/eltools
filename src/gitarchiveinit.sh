@@ -81,9 +81,15 @@ fi
 
 # init variables
 github=`githubrepos.sh elor`
-gitolite=`gitoliterepos.sh gitolite@sim`
+gitolite=`gitoliterepos.sh gitolite@sim | grep -v gitolite-admin`
 
 duplicates=`echo -e "$github" "$gitolite" | xargs -n1 basename | sort | uniq -d`
+
+# remove the duplicates from $gitolite
+gitolite_unique=$(for repo in $gitolite; do
+  grep `basename $repo` &>/dev/null <<< "$duplicates" || echo $repo
+done
+)
 
 # init the github repositories first
 for repo in $github; do
@@ -95,23 +101,52 @@ done
 
 # add remotes for duplicate repos
 for repo in $duplicates; do
-  if ! git remote add gitolite@sim:`grep $repo <<< $gitolite`; then
+  cd $repo || exit 1
+  if ! git remote add sim gitolite@sim:`grep $repo <<< "$gitolite"`; then
     echo "git remote add failed" >&2
     exit 1
   fi
+
+  if ! git fetch sim; then
+    echo "git fetch sim failed" >&2
+    exit 1
+  fi
+  
+  cd - >/dev/null || exit 1
 done
 
 # initialize gitolite repos
-for repo in $gitolite; do
+for repo in $gitolite_unique; do
   echo $repo &>/dev/null
-  if ! git clone gitolite@sim:$repo; 
+  if ! git clone gitolite@sim:$repo; then
     echo "git clone failed" >&2
     exit 1
   fi
 done
 
-# TODO checkout every branch from origin before checkout out master again
+# checkout every branch from origin before checkout out master again
+for repo in *; do
+  if ! [ -d "$repo" ]; then
+    echo "$repo is no directory anymore" >&2
+    exit 1
+  fi
+
+  cd $repo || exit 1
+
+  for branch in `git branch -a | grep 'remotes/origin' | grep -v '\->' | xargs -n1 basename`; do
+    git checkout $branch
+  done
+
+  # return to the master branch
+  git branch -a  &>/dev/null | grep master &>/dev/null && git checkout master
+
+  cd - >/dev/null || exit 1
+done
 
 # set up pullall
+echo "creating link to pullall.sh"
 ln -s eltools/src/pullall.sh pullall.sh
+
+# done
+echo done
 
