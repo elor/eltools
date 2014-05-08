@@ -74,7 +74,7 @@ if [ $? != 1 ]; then
 fi
 
 ssh gitolite@sim exit &>/dev/null
-if [ $? != 0]; then
+if [ $? != 25 ]; then
   echo "ssh gitolite@sim failed" >&2
   exit 1
 fi
@@ -83,12 +83,7 @@ fi
 github=`githubrepos.sh elor`
 gitolite=`gitoliterepos.sh gitolite@sim`
 
-duplicates=`echo -e github.repos gitolite.repos | xargs -n1 basename | sort | uniq -d`
-
-echo -e "$github"
-echo -e "$gitolite"
-echo
-echo -e "$duplicates"
+duplicates=`echo -e "$github" "$gitolite" | xargs -n1 basename | sort | uniq -d`
 
 # init the github repositories first
 for repo in $github; do
@@ -100,7 +95,6 @@ done
 
 # add remotes for duplicate repos
 for repo in $duplicates; do
-  echo gitolite@sim:`grep $repo <<< $gitolite`
   if ! git remote add gitolite@sim:`grep $repo <<< $gitolite`; then
     echo "git remote add failed" >&2
     exit 1
@@ -109,6 +103,7 @@ done
 
 # initialize gitolite repos
 for repo in $gitolite; do
+  echo $repo &>/dev/null
   if ! git clone gitolite@sim:$repo; 
     echo "git clone failed" >&2
     exit 1
