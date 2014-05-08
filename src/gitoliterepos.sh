@@ -25,5 +25,5 @@ esac
 
 address="$1"
 
-ssh $address 2>/dev/null | sed -n 's_\s*.*R.*\s\+\(.\+\)\s*$_\1_p'
+ssh $address 2>/dev/null | tr '\r' '\n' | sed -n 's_\s*.*R.*\s\+\(.\+\)\s*$_\1_p'
 
