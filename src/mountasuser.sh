@@ -104,5 +104,7 @@ if ! sudo mount "$device" "$targetdir" -o uid=$uid,gid=$gid; then
   exit 1
 fi
 
+ln -si "$targetdir" "`basename "$targetdir"`"
+
 echo "mount successful"
 
