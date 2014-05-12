@@ -1,7 +1,8 @@
 #!/bin/bash
 
 file=$1
-command=$2
+shift
+command="$@"
 
 if ! [ -f "$file" ] || [ -z "$command" ];then
   echo "syntax: $0 <filename> <command>"
@@ -24,7 +25,15 @@ else
     newdate=`date -r "$file"`
 
     if [ "$curdate" != "$newdate" ];then
+
+      echo
+      echo "----- starting command -----"
+
       $command
+
+      echo
+      echo "----- command finished -----"
+
       curdate="$newdate"
     fi
 
