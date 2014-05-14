@@ -28,15 +28,20 @@ else
 
     if [ "$curdate" != "$newdate" ];then
 
-      echo
-      echo "----- starting command -----"
+      if [ -x $command ]; then
+        echo
+        echo "----- starting command -----"
 
-      $command
+        $command
 
-      echo
-      echo "----- command finished -----"
+        echo
+        echo "----- command finished -----"
 
-      curdate="$newdate"
+        curdate="$newdate"
+      else
+        echo "cannot execute $command at the moment"
+        sleep 1
+      fi
     fi
 
     usleep 100000
