@@ -4,6 +4,8 @@ file=$1
 shift
 command="$@"
 
+[ -z "$command" ] && command="$file"
+
 if ! [ -f "$file" ] || [ -z "$command" ];then
   echo "syntax: $0 <filename> <command>"
   exit 1
