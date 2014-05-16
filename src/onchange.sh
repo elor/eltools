@@ -47,7 +47,8 @@ else
       fi
     fi
 
-    usleep 100000
+    sleep 0.1
+
   done
 fi
 
