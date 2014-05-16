@@ -28,7 +28,8 @@ else
 
     if [ "$curdate" != "$newdate" ];then
 
-      if [ -x $command ]; then
+      set -- $command
+      if [ -x "$1" ] || [ -x `which $1` ]; then
         echo
         echo "----- starting command -----"
 
@@ -39,7 +40,7 @@ else
 
         curdate="$newdate"
       else
-        echo "cannot execute $command at the moment"
+        echo "cannot execute $1 at the moment"
         sleep 1
       fi
     fi
