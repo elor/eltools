@@ -33,10 +33,12 @@ else
         echo
         echo "----- starting command -----"
 
-        $command
-
-        echo
-        echo "----- command finished -----"
+        if $command; then
+          echo
+          echo "----- command finished -----"
+        else
+          echo -e "\n----- command failed: $? -----"
+        fi
 
         curdate="$newdate"
       else
