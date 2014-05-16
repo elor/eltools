@@ -7,7 +7,7 @@ if [ -z "$src" ]; then
 fi
 
 gethash(){
-  for f in *.tex */*.tex; do
+  for f in `find . -name '*.tex'`; do
     echo "$f `date --reference $f`"
   done | md5sum
 }
@@ -27,7 +27,7 @@ while true; do
       read line
       oldhash=""
     else
-      usleep 100000
+      sleep 0.1
     fi
   fi
 
