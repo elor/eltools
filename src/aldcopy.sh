@@ -1,12 +1,12 @@
 #!/bin/bash
 
-src=/home/e.lorenz/code/parsivald
-dst="`pwd`"
+sourcedir=/home/e.lorenz/code/parsivald
+destination="`pwd`"
 
-cd "$src"
+cd "$sourcedir"
 
-cp -r "`which parsivald`" input lmpout options.cfg pyprefs "$dst"
+cp -r input lmpout options.cfg pyprefs "$destination"
 
-mkdir -p "$dst/Scripts"
-cp -r Scripts/debugsimulation.sh Scripts/valgrindsimulation.sh Scripts/runsimulation.sh Scripts/startworkers.sh Scripts/screenlocal.sh Scripts/localjob.sh "$dst/Scripts/"
+mkdir -p "$destination/Scripts"
+cp -r Scripts/runlocal.sh "$destination/Scripts/"
 
