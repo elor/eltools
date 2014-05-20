@@ -7,15 +7,13 @@ if [ -z "$src" ]; then
 fi
 
 gethash(){
-  for f in `find . -name '*.tex'`; do
-    echo "$f `date --reference $f`"
-  done | md5sum
+  find . -name '*.tex' | xargs stat -c %y $f | md5sum
 }
 
 oldhash=""
 
 while true; do
-  ls > /dev/null
+  ls > /dev/null || exit 1
 
   newhash=`gethash`
 
