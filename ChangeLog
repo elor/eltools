@@ -1,0 +1,4 @@
+2014-05-20	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/aldcopy.sh: Scripts removed altogether. Autoconf should handle them
+
