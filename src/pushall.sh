@@ -2,18 +2,32 @@
 #
 # pushes all repos to all remotes
 
+error=false
+
+srcdir=`dirname $0`
+if [ -n "$1" ]; then
+  if [ -d "$1" ]; then
+    srcdir="$1"
+  else
+    echo "argument is no directory: '$1'" >&2
+    exit 1
+  fi
+fi
+
+cd "$srcdir"
+
 [ "`echo */.git`" != "*/.git" ] && for dir in */.git; do
-  pushd $dir>/dev/null
+  cd "$dir/.." || continue
   for remote in `git remote`; do
-    echo "$PWD $remote"
-    git push --all $remote
+    echo "$dir $remote"
+    git push --all $remote || error=true
   done
-  popd>/dev/null
+  cd -
 done
 
 [ "`echo */pushall.sh`" != "*/pushall.sh" ] && for file in */pushall.sh; do
-  pushd `dirname $file`
-  ./pushall.sh
-  popd
+  ./pushall.sh `dirname $file` || error=true
 done
+
+$error && exit 1
 
