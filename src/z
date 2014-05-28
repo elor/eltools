@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# opens a file depending on its type
+
+filename="$1"
+dir=`dirname "$filename"`
+base=`basename "$filename"`
+ext="${base##*.}"
+
+[ ! -f "$1" ] && echo "$1 is not a file" >&2 && exit 1
+
+case "$ext" in
+  txt)  vim "$filename"  ;;
+  md)  vim "$filename"  ;;
+  html)  vim "$filename"  ;;
+  sh) vim "$filename" ;;
+  pdf)  evince "$filename"  ;;
+  jpg)  sxiv "$filename"  ;;
+  bmp)  sxiv "$filename"  ;;
+  png)  sxiv "$filename"  ;;
+  *)  cat "$filename" ;;
+esac
+
