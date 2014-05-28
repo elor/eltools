@@ -7,17 +7,21 @@ dir=`dirname "$filename"`
 base=`basename "$filename"`
 ext="${base##*.}"
 
-[ ! -f "$1" ] && echo "$1 is not a file" >&2 && exit 1
+[ ! -f "$filename" ] && echo "$1 is not a file" >&2 && exit 1
 
 case "$ext" in
   txt)  vim "$filename"  ;;
   md)  vim "$filename"  ;;
   html)  vim "$filename"  ;;
   sh) vim "$filename" ;;
+  tex) vim "$filename" ;;
   pdf)  evince "$filename"  ;;
+  ps)  evince "$filename"  ;;
+  dvi)  evince "$filename"  ;;
   jpg)  sxiv "$filename"  ;;
   bmp)  sxiv "$filename"  ;;
   png)  sxiv "$filename"  ;;
-  *)  cat "$filename" ;;
+  xyz)  pymol -x "$filename"  ;;
+  *)  echo "unknown file extension: $ext" >&2 ;;
 esac
 
