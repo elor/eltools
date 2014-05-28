@@ -29,5 +29,6 @@ done
   ./pushall.sh `dirname $file` || error=true
 done
 
-$error && exit 1
+# exit
+! $error
 
