@@ -13,7 +13,7 @@ mytest(){
 dead=false
 quit(){
   dead=true
-  jobs -rl | awk '{print $2}' | xargs kill &>/dev/null
+  kill `jobs -p`
 }
 
 trap quit INT
