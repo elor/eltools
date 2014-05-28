@@ -2,10 +2,13 @@
 #
 # opens a file depending on its type
 
+# TODO use dynamic lists, i.e. system standards and file associations
+
 filename="$1"
 dir=`dirname "$filename"`
 base=`basename "$filename"`
 ext="${base##*.}"
+[ "$ext" == "$base" ] && ext=""
 
 [ ! -f "$filename" ] && echo "$1 is not a file" >&2 && exit 1
 
@@ -21,7 +24,9 @@ case "$ext" in
   jpg)  sxiv "$filename"  ;;
   bmp)  sxiv "$filename"  ;;
   png)  sxiv "$filename"  ;;
+  gif)  sxiv "$filename"  ;;
   xyz)  pymol -x "$filename"  ;;
+  "") echo "no file extension: $filename" ;;
   *)  echo "unknown file extension: $ext" >&2 ;;
 esac
 
