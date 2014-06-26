@@ -21,6 +21,7 @@ cd "$srcdir"
   for remote in `git remote`; do
     echo "$dir $remote"
     git push --all $remote || error=true
+    git push $remote master --tags || error=true
   done
   cd -
 done
