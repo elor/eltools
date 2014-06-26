@@ -1,3 +1,9 @@
+2014-06-25	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/changelogline.sh: This script prints the changelog author line. New name required.
+
+	* src/aldcopy.sh: removed since parsivald now has a global data directory and proper installation path
+
 2014-05-20	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/aldcopy.sh: Scripts removed altogether. Autoconf should handle them
