@@ -12,7 +12,7 @@ gethash(){
 
 senderror(){
 	  if type notify-send &>/dev/null; then
-		    notify-send -t 1 "latexrefre.sh: $@"
+		    notify-send -t 1000 "latexrefre.sh: $@"
 	  else
 		    echo "couldn't find'notify-send'"
 	  fi
