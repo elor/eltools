@@ -1,3 +1,7 @@
+2014-08-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/element2mass.py: added
+
 2014-06-26	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/pushall.sh: pushing tags of the master branch
