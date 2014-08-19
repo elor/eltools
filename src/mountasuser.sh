@@ -71,7 +71,7 @@ oldpath=`mount | grep "^$fulldevice" | cut -d\  -f3 | xargs`
 if [ -n "$oldpath" ]; then
   echo "$device ($fulldevice) is already mounted as:" >&2
   echo "  $oldpath" >&2
-  exit 1
+  exit 0
 fi
 
 # default to a random id
