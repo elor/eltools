@@ -4,6 +4,14 @@
 
 	* src/xzdir.sh: PBS script for directory compression added
 
+	* runxclock.sh: .Xauthority added
+
+	* matstudlicense.sh: removed
+
+	* o: removed
+
+	* twowaysync.sh: removed
+
 2014-08-11	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* Makefile.am: `make distcheck` enabled
