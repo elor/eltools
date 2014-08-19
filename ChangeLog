@@ -2,6 +2,8 @@
 
 	* src/mountasuser.sh: don't return an error if it's already mounted
 
+	* src/xzdir.sh: PBS script for directory compression added
+
 2014-08-11	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* Makefile.am: `make distcheck` enabled
