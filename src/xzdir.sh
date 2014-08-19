@@ -1,9 +1,12 @@
 #!/bin/bash
 #
 #PBS -l nodes=1:ppn=1
-#PBS -m ae
+#PBS -m a
+#PBS -j oe
+#PBS -o $HOME
 #
 # compresses the current folder into a .tar.xz file
+# compression statistics will be written into the users' home directory
 
 [ -n "$PBS_O_WORKDIR" ] && cd "$PBS_O_WORKDIR"
 

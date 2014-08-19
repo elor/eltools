@@ -3,6 +3,7 @@
 	* src/mountasuser.sh: don't return an error if it's already mounted
 
 	* src/xzdir.sh: PBS script for directory compression added
+	PBS options adjusted
 
 	* runxclock.sh: .Xauthority added
 
