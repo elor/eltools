@@ -1,3 +1,7 @@
+2014-08-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/fetchall.sh: script to update bare git repos (one-way)
+
 2014-08-19	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/mountasuser.sh: don't return an error if it's already mounted
