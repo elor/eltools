@@ -8,5 +8,5 @@ listfiles(){
     git diff --name-only
 }
 
-listfiles | sort -hu | sed -e 's/^/\t* /' -e 's/$/: \n/'
+listfiles | sort -u | sed -e 's/^/\t* /' -e 's/$/: \n/'
 
