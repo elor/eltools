@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 # print changelog line for the current date and git user
 
 user=`git config user.name`
