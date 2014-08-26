@@ -3,8 +3,10 @@
 	* src/changelogfiles.sh: renamed to changelogupdate.sh
 
 	* src/changelogupdate.sh: can be invoked by emacs and vim
+	warning if there's no change to be added
 
 	* src/changelogline.sh: cheader comments reformatted
+
 
 2014-08-25	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 

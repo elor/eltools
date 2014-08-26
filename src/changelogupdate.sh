@@ -17,6 +17,11 @@ formatnewfile(){
 input="`cat $1`"
 files="`listfiles`"
 
+if [ -z "$files" ]; then
+    echo "No modified or staged files found. Use 'git add' to stage untracked files first." >&2
+    exit
+fi
+
 thischange="`changelogline.sh`"
 
 if grep -q "$thischange" <<< "$input"; then
