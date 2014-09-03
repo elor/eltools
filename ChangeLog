@@ -1,3 +1,7 @@
+2014-09-03	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/pacman-disowned.sh: script to view disowned files added
+
 2014-08-26	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/changelogfiles.sh: renamed to changelogupdate.sh
