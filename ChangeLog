@@ -2,6 +2,18 @@
 
 	* src/pacman-disowned.sh: script to view disowned files added
 
+2014-09-01	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/latexrefre.sh: emphasising errors and warnings using bash color escape codes
+
+2014-08-28	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/lmpmpi.sh: removed
+
+	* src/lmprun.sh: removed
+
+	* src/gitfilter.sh: awesome wrapper around 'git filter-branch' added
+
 2014-08-26	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/changelogfiles.sh: renamed to changelogupdate.sh

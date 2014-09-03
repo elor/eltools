@@ -22,13 +22,17 @@ senderror(){
 
 oldhash=""
 
+colorize(){
+    sed -e "s/error\|warning/\x1b[7m&\x1b[0m/gi"
+}
+
 while true; do
     ls > /dev/null || exit 1
 
     newhash=`gethash`
 
     if [ "$oldhash" != "$newhash" ]; then
-        pdflatex --halt-on-error --interaction=nonstopmode "$src" || senderror 'pdflatex failed'
+        pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize || senderror 'pdflatex failed'
         oldhash="$newhash"
     else
         if read -t 0; then
