@@ -2,6 +2,7 @@
 
 	* src/latexrefre.sh: looking for .pdf_tex files, too
 	looking for a tex file that contains '\documentclass'
+	updating on .sty files
 
 2014-09-03	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 

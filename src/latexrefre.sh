@@ -7,7 +7,7 @@ if [ -z "$src" ]; then
 fi
 
 gethash(){
-	  find . -name '*.tex' -o -name '*.pdf_tex' | grep -v '#' | xargs stat -c %y | md5sum
+	  find . -name '*.tex' -o -name '*.pdf_tex' -o -name '*.sty' | grep -v '#' | xargs stat -c %y | md5sum
 }
 
 senderror(){
