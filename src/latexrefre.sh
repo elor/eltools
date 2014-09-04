@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 [ $1 ] && src="$1" || src="masterthesis.tex"
 if [ -z "$src" ]; then
