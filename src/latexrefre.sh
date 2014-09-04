@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ $1 ] && src="$1" || src="masterthesis.tex"
+[ $1 ] && src="$1" || src="`grep -l \\documentclass *.tex`"
 if [ -z "$src" ]; then
     echo "usage: $0 <input.tex>"
     exit
