@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 [ $1 ] && src="$1" || src="masterthesis.tex"
 if [ -z "$src" ]; then
@@ -7,7 +7,7 @@ if [ -z "$src" ]; then
 fi
 
 gethash(){
-	  find . -name '*.tex' | grep -v '#' | xargs stat -c %y | md5sum
+	  find . -name '*.tex' -o -name '*.pdf_tex' | grep -v '#' | xargs stat -c %y | md5sum
 }
 
 senderror(){
@@ -23,7 +23,7 @@ senderror(){
 oldhash=""
 
 colorize(){
-    sed -e "s/error\|warning/\x1b[7m&\x1b[0m/gi"
+    sed -e "s/^!.*\|^l.[0-9]\+\s.*\|error\|overfull\|undefined\|warning/\x1b[7m&\x1b[0m/gi"
 }
 
 while true; do
