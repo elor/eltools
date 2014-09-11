@@ -30,7 +30,7 @@ colorize(){
 }
 
 while true; do
-    ls > /dev/null || exit 1
+    sync
 
     newhash=`gethash`
 
