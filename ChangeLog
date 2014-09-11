@@ -3,6 +3,8 @@
 	* src/latexrefre.sh: re-compiling on changes to the toc, lof, loa or lot
 	using `sync` instead of some cheap hack
 
+	* src/parallel.sh: removed in favor of gnu parallel
+
 2014-09-04	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: looking for .pdf_tex files, too
