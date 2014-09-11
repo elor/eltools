@@ -7,7 +7,10 @@ if [ -z "$src" ]; then
 fi
 
 gethash(){
-	  find . -name '*.tex' -o -name '*.pdf_tex' -o -name '*.sty' | grep -v '#' | xargs stat -c %y | md5sum
+    # find file changes by date
+	  find . -name '*.tex' -o -name '*.pdf_tex' -o -name '*.sty' -o -name '*.bib' | grep -v '#' | xargs stat -c %y | md5sum
+    # find file changes by content (table of contents and stuff), for second pass, e.g. after a failure
+    find . -name '*.toc' -o -name '*.loa' -o -name '*.lof' -o -name '*.lot' | xargs cat | md5sum
 }
 
 senderror(){
