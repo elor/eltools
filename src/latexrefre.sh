@@ -36,6 +36,8 @@ while true; do
 
     if [ "$oldhash" != "$newhash" ]; then
         pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize || senderror 'pdflatex failed'
+        echo
+        echo "Press Enter to force a recompilation"
         oldhash="$newhash"
     else
         if read -t 0; then

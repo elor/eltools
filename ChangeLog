@@ -1,3 +1,7 @@
+2014-09-12	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/latexrefre.sh: "Press Enter" added
+
 2014-09-11	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: re-compiling on changes to the toc, lof, loa or lot
