@@ -29,18 +29,48 @@ colorize(){
     sed -e "s/^!.*\|^l.[0-9]\+\s.*\|error\|overfull\|undefined\|warning/\x1b[7m&\x1b[0m/gi"
 }
 
+copybak(){
+    base="$1"
+    cp "$base.pdf" "${base}_bak.pdf"
+}
+
+listundefined(){
+    base="$1"
+    
+    undefined=$(grep -i undefined "$base".log | sed -r -n "s/^[^\`]*\`([^']+)'.*$/\1/p")
+    if [ -n "$undefined" ]; then
+        cat <<EOF|colorize
+
+undefined references and citations:
+
+$undefined
+
+EOF
+    fi
+}
+
+base=`basename "$src" .tex`
+
 while true; do
     sync
 
     newhash=`gethash`
 
     if [ "$oldhash" != "$newhash" ]; then
-        pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize || senderror 'pdflatex failed'
-        echo
-        echo "Your options:"
-        echo "[Enter]: manually restart"
-        echo "[Ctrl+C]: quit"
-        echo
+        if pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize; then
+            copybak "$base"
+            listundefined "$base"
+        else
+            senderror 'pdflatex failed'
+        fi
+
+        cat <<EOF
+
+"Your options:"
+"[Enter]: manually restart"
+"[Ctrl+C]: quit"
+
+EOF
         oldhash="$newhash"
     else
         if read -t 0; then

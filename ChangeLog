@@ -1,3 +1,7 @@
+2014-10-02	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/latexrefre.sh: showing undefined references and citations after compilation
+
 2014-09-15	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: description text added
