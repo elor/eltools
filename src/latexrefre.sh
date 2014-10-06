@@ -26,7 +26,7 @@ senderror(){
 oldhash=""
 
 colorize(){
-    sed -e "s/^!.*\|^l.[0-9]\+\s.*\|error\|overfull\|undefined\|warning/\x1b[7m&\x1b[0m/gi"
+    sed -r -e "s/^!.*|^l.[0-9]+\s.*|error|overfull|undefined|warning|multipl[ey]/\x1b[7m&\x1b[0m/gi"
 }
 
 copybak(){
@@ -34,17 +34,28 @@ copybak(){
     cp "$base.pdf" "${base}_bak.pdf"
 }
 
+listmultiple(){
+    base="$1"
+    
+    multiple=$(grep -i 'multipl[ey]' "$base".log | sed -r -n "s/^[^\`]*\`([^']+)'.*$/\1/p")
+    if [ -n "$multiple" ]; then
+        cat <<EOF
+
+multiple labels:
+$multiple
+EOF
+    fi
+}
+
 listundefined(){
     base="$1"
     
     undefined=$(grep -i undefined "$base".log | sed -r -n "s/^[^\`]*\`([^']+)'.*$/\1/p")
     if [ -n "$undefined" ]; then
-        cat <<EOF|colorize
+        cat <<EOF
 
 undefined references and citations:
-
 $undefined
-
 EOF
     fi
 }
@@ -59,7 +70,8 @@ while true; do
     if [ "$oldhash" != "$newhash" ]; then
         if pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize; then
             copybak "$base"
-            listundefined "$base"
+            listmultiple "$base" | colorize
+            listundefined "$base" | colorize
         else
             senderror 'pdflatex failed'
         fi
