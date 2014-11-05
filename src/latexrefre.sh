@@ -8,9 +8,13 @@ fi
 
 gethash(){
     # find file changes by date
-	  find . -name '*.tex' -o -name '*.pdf_tex' -o -name '*.sty' -o -name '*.bib' | grep -v '#' | xargs stat -c %y | md5sum
+	  find . -name '*.tex' -o -name '*.pdf_tex' -o -name '*.sty' -o -name '*.bib' -o -name '*.bst' | grep -v '#' | xargs stat -c %y | md5sum
     # find file changes by content (table of contents and stuff), for second pass, e.g. after a failure
     find . -name '*.toc' -o -name '*.loa' -o -name '*.lof' -o -name '*.lot' | xargs cat | md5sum
+}
+
+auxhash(){
+    find . -name '*.aux' | grep -v '#' | xargs md5sum
 }
 
 senderror(){
@@ -31,7 +35,7 @@ colorize(){
 
 copybak(){
     base="$1"
-    cp "$base.pdf" "${base}_bak.pdf"
+    cp -v "$base.pdf" "${base}_bak.pdf"
 }
 
 listmultiple(){
@@ -69,9 +73,18 @@ while true; do
 
     if [ "$oldhash" != "$newhash" ]; then
         if pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize; then
+            auxhashbefore=`auxhash`
+            bibtex $base.aux
+
             copybak "$base"
+
             listmultiple "$base" | colorize
             listundefined "$base" | colorize
+
+            if [ "$auxhashbefore" != "`auxhash`" ]; then
+                newhash=""
+            fi
+
         else
             senderror 'pdflatex failed'
         fi
@@ -94,4 +107,3 @@ EOF
     fi
 
 done
-

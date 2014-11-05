@@ -1,3 +1,8 @@
+2014-11-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/latexrefre.sh: correctly handling bibtex updates
+	tracking changes in .bst files (bibliography styles)
+
 2014-10-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/transpose.sh: script to transpose rows and columns added
