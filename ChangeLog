@@ -1,3 +1,7 @@
+2014-11-15	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/keymap.sh: using german deadacute if available
+
 2014-11-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: correctly handling bibtex updates
