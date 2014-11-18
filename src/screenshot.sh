@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  filename="$HOME/screenshot.jpg"
+  filename="$HOME/screenshot.png"
 else
   filename="$1"
 fi
