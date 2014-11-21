@@ -72,6 +72,9 @@ while true; do
     newhash=`gethash`
 
     if [ "$oldhash" != "$newhash" ]; then
+        
+        timebefore=`date +%s%N`
+
         if pdflatex --halt-on-error --interaction=nonstopmode "$src" | colorize; then
             auxhashbefore=`auxhash`
             bibtex $base.aux
@@ -84,6 +87,12 @@ while true; do
             if [ "$auxhashbefore" != "`auxhash`" ]; then
                 newhash=""
             fi
+
+            timeafter=`date +%s%N`
+
+            let runtime=timeafter-timebefore
+
+            echo "runtime: $runtime" | sed -r 's/([0-9]{3})([0-9]{6})$/.\1 s/'
 
         else
             senderror 'pdflatex failed'

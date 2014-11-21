@@ -1,3 +1,7 @@
+2014-11-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/latexrefre.sh: execution duration information added
+
 2014-11-18	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* autogen.sh: removing COPYING
