@@ -1,6 +1,7 @@
 2014-11-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: execution duration information added
+	--nomishaps option added to hide unused and duplicate citations
 
 2014-11-18	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 

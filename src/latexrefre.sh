@@ -1,5 +1,12 @@
 #!/bin/bash
 
+showmishaps=true
+
+if [ "$1" == '--nomishaps' ];then
+    showmishaps=false
+    shift
+fi
+
 [ $1 ] && src="$1" || src="`grep -l \\documentclass *.tex`"
 if [ -z "$src" ]; then
     echo "usage: $0 <input.tex>"
@@ -81,8 +88,10 @@ while true; do
 
             copybak "$base"
 
-            listmultiple "$base" | colorize
-            listundefined "$base" | colorize
+            if $showmishaps; then
+                listmultiple "$base" | colorize
+                listundefined "$base" | colorize
+            fi
 
             if [ "$auxhashbefore" != "`auxhash`" ]; then
                 newhash=""
