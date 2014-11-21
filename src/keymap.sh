@@ -10,7 +10,7 @@ case $keymap in
     setxkbmap us
     ;;
   us)
-    setxkbmap de
+    setxkbmap de -variant deadacute || setxkbmap de
     ;;
   *)
     echo "unrecognized keymap. setting to english"
