@@ -14,6 +14,7 @@ colstart=1
 tmpfile=/tmp/watchscroll_$$_command.tmp
 outfile=/tmp/watchscroll_$$_command.out
 logfile=''
+redraw=true
 
 echo "waiting for the command to finish" > $outfile
 
@@ -95,8 +96,8 @@ while true; do
             shift
             ;;
         --interval=?*)
-        setinterval "`sed 's/--interval=\(.*\)/\1/' <<< "$1" `"
-        ;;
+            setinterval "`sed 's/--interval=\(.*\)/\1/' <<< "$1" `"
+            ;;
         --precise)
             echo "--precise not implemented yet" >&2
             ;;
@@ -155,9 +156,13 @@ done
 # runtime functions #
 #####################
 
+update(){
+    redraw=true
+}
+
 iscommandrunning(){
     [ -e $tmpfile ]
-#    (( `jobs -p | wc l` > 0 ))
+    #    (( `jobs -p | wc l` > 0 ))
 }
 
 runcommand(){
@@ -169,6 +174,7 @@ runcommand(){
         echo "no command" > outfile
     else
         { bash -c "$command" &>$tmpfile; mv $tmpfile $outfile; } &>/dev/null &
+        update # update as soon as the command is finished, not right after it started
     fi
 }
 
@@ -226,7 +232,7 @@ pageoutput(){
     local start="$1"
     local lines="$2"
     local end=$((start+lines))
-#    echo "$start - $lines - $end"
+    #    echo "$start - $lines - $end"
     getoutput | sed -n "$start,$end p"
 }
 
@@ -234,7 +240,7 @@ scrollhorizontal(){
     local start="$1"
     local cols="$2"
     local end=$((start+cols))
-#    echo "$start - $lines - $end"
+    #    echo "$start - $lines - $end"
     cut -c "$start-$end"
 }
 
@@ -249,6 +255,8 @@ croppage(){
     (( pagestart < 1 )) && pagestart=1
 
     log "crop:$pagestart-$outlines-$height"
+
+    update
 }
 
 cropcols(){
@@ -259,6 +267,8 @@ cropcols(){
     (( colstart < 1 )) && colstart=1
 
     log "cols:$colstart"
+
+    update
 }
 
 getinput(){
@@ -282,6 +292,7 @@ getinput(){
 }
 
 trap 'log "killing $$"; rm -f $tmpfile $outfile ; trap 2 ; kill -2 $$' 2 3 15
+trap update WINCH
 
 ############################
 # TODO catch resize signal #
@@ -292,31 +303,33 @@ runcommand "$@"
 sleep 0.1
 
 while true; do
-    LINES=$(tput lines)
-    COLUMNS=$(tput cols)
-    height=$((LINES-4))
-    width=$((COLUMNS-1))
-    output=$(pageoutput $pagestart $height | scrollhorizontal $colstart $width)
+    if $update; then
+        LINES=$(tput lines)
+        COLUMNS=$(tput cols)
+        height=$((LINES-4))
+        width=$((COLUMNS-1))
+        output=$(pageoutput $pagestart $height | scrollhorizontal $colstart $width)
 
-    header=`formatheader "$COLUMNS" "$@"`
+        header=`formatheader "$COLUMNS" "$@"`
 
-    iscommandrunning || runcommand "$@"
-    echo -en '\033[2J\033[0;0H'
+        iscommandrunning || runcommand "$@"
+        echo -en '\033[2J\033[0;0H'
 
-    cat <<EOF
+        cat <<EOF
 $header
 
 $output
 EOF
+    fi
 
     input=`getinput $interval`
 
     case $? in
         142)
-        # timeout reached
+            # timeout reached
             ;;
         0)
-        # user input
+            # user input
             case `xxd -ps <<< "$input"` in 
                 1b0a) # prefix for interactive keys: ^[
                     outlines=$(countoutputlines)
@@ -369,10 +382,13 @@ EOF
                 710a) # q
                     kill -2 $$
                     ;;
+                710a) # q
+                    update
+                    ;;
             esac
             ;;
         *)
-        # some error or abort
+            # some error or abort
             break
     esac
 done
