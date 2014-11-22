@@ -7,7 +7,7 @@
 ##########
 
 showtitle=true
-interval=0.1
+interval=1.0
 erraction=""
 pagestart=1
 colstart=1
@@ -300,8 +300,7 @@ while true; do
 
     header=`formatheader "$COLUMNS" "$@"`
 
-    runcommand "$@"
-
+    iscommandrunning || runcommand "$@"
     echo -en '\033[2J\033[0;0H'
 
     cat <<EOF
