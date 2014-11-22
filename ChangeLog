@@ -1,3 +1,8 @@
+2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/watchscroll.sh: watch-like capabilities, but with scrolling
+
+
 2014-11-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/latexrefre.sh: execution duration information added
