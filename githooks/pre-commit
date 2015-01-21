@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# A simple hook to automatically stage the ChangeLog
+
+git add ChangeLog || exit 1
+

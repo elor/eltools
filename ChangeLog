@@ -8,6 +8,8 @@
 
 	* src/scrollevince.sh: interactive script to scroll all open evince windows simultaneously. Still a bit buggy
 
+	* githooks/pre-commit: auto-stage ChangeLog during commit
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
