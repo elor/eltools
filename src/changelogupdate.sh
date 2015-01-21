@@ -38,18 +38,18 @@ if grep -q "$thischange" <<< "$input"; then
 \\\t
  }" <<< "$current")
         else
-            append="$append
-`formatnewfile "$file"`"
+            append="$append`formatnewfile "$file"`
+
+"
         fi
     done <<< "$files"
-    append="$append
+    [ -z "$append" ] && append="
 "
 
     cat << EOF | sed '1 { /^\s*$/d }'
 $before
 $current
-$append
-$after
+$append$after
 EOF
 
 else

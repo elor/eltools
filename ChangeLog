@@ -1,6 +1,7 @@
 2015-01-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/changelogupdate.sh: only writing staged files to the changelog
+	now with the correct amount of empty lines
 
 	* src/mountasuser.sh: convenience functions and additional error checking
 
