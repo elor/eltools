@@ -6,10 +6,11 @@
 
 	* src/randomstring.sh: printing a short random string, e.g. for (unsafe) passwords
 
+	* src/scrollevince.sh: interactive script to scroll all open evince windows simultaneously. Still a bit buggy
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
-
 
 2014-11-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
