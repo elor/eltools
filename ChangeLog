@@ -11,6 +11,8 @@
 
 	* githooks/pre-commit: auto-stage ChangeLog during commit
 
+	* src/unstagedfiles.sh: print all unstaged, but tracked files for the direct subdirectories
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
