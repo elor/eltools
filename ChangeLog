@@ -13,6 +13,9 @@
 
 	* src/unstagedfiles.sh: print all unstaged, but tracked files for the direct subdirectories
 
+	* src/pullall.sh: improved directory traversal
+	easier dirname printing (as in 'easier on the eyes')
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
