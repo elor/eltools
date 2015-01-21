@@ -1,3 +1,7 @@
+2015-01-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/changelogupdate.sh: only writing staged files to the changelog
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling

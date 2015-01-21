@@ -2,12 +2,12 @@
 # print changelog line for the current date and git user
 
 listfiles(){
-    (
+    {
     # list staged files
     git diff --name-only --cached
     # list changed files
-    git diff --name-only
-    ) | sort -u | grep -iv '^changelog$'
+#   git diff --name-only
+    } | sort -u | grep -iv '^changelog$'
 }
 
 formatnewfile(){
@@ -18,8 +18,9 @@ input="`cat $1`"
 files="`listfiles`"
 
 if [ -z "$files" ]; then
-    echo "No modified or staged files found. Use 'git add' to stage untracked files first." >&2
-    exit
+    echo "No staged files found. Use 'git add' to stage files." >&2
+    cat <<< "$input"
+    exit 1
 fi
 
 thischange="`changelogline.sh`"
