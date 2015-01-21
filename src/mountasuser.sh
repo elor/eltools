@@ -23,6 +23,11 @@ fi
 
 defaultdevice=/dev/sdb1
 
+getuuid(){
+    local device="$1"
+    ls -l /dev/disk/by-uuid | grep "$(basename $device)$" | xargs | cut -d\  -f9
+}
+
 case "$1" in
   --help)
     ;;
@@ -30,7 +35,7 @@ case "$1" in
     ;;
   "")
     echo "No device supplied" >&2
-    read -r -p "Which device? [$defaultdevice] " device
+    read -r -p "Which device? [$defaultdevice] (`getuuid "$defaultdevice"`)" device
     [ -z "$device" ] && device=$defaultdevice
     ;;
   *)
@@ -78,7 +83,7 @@ fi
 id=`sed -e 's \\\\ / g' -e 's ^/  g' -e 's / _ g' <<< $device`
 
 if [ "`dirname "$device"`" == /dev ]; then
-  uuid=`ls -l /dev/disk/by-uuid | grep "$(basename $device)$" | xargs | cut -d\  -f9`
+  uuid=`getuuid "$device"`
   [ -n "$uuid" ] && id=$uuid
 fi
 
@@ -104,7 +109,8 @@ if ! sudo mount "$device" "$targetdir" -o uid=$uid,gid=$gid; then
   exit 1
 fi
 
-ln -si "$targetdir" "`basename "$targetdir"`"
+linkname="`basename "$targetdir"`"
+[ -L "$linkname" ] && rm "$linkname"
+ln -si "$targetdir" "$linkname"
 
 echo "mount successful"
-
