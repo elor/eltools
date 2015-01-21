@@ -16,6 +16,8 @@
 	* src/pullall.sh: improved directory traversal
 	easier dirname printing (as in 'easier on the eyes')
 
+	* src/pushall.sh: pretty directory and remote texts
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
