@@ -4,6 +4,8 @@
 
 	* src/mountasuser.sh: convenience functions and additional error checking
 
+	* src/randomstring.sh: printing a short random string, e.g. for (unsafe) passwords
+
 2014-11-22	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/watchscroll.sh: watch-like capabilities, but with scrolling
