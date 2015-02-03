@@ -1,6 +1,7 @@
 2015-02-03	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/kerbalpodcast-dl.sh: script for auto-downloading the latest kerbal podcast
+	specifying the output file
 
 2015-01-21	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 

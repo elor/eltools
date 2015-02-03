@@ -15,4 +15,4 @@ echo "download link: $link"
 echo "output file: $file"
 echo
 
-wget "$link"
+wget -O "$file" "$link"
