@@ -1,3 +1,21 @@
+2015-02-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* autogen.sh: not removing COPYING anymore, so 'make dist' does not fail
+
+	* configure.ac: auto-generated with src/build/create-configureac.sh
+	--enable-FEATURE/--disable-FEATURE for every src subdirectory added
+
+	* .gitignore: COPYING added
+
+	* Makefile.am: auto-generated with src/build/create-makefileam.sh
+	selecting features according to --enable-FEATURE/--disable-FEATURE
+
+	* src/: source files reorganized into selectable features (./configure --enable-FEATURE)
+
+	* src/build/create-configureac.sh: auto-generating configure.ac from the source directory
+
+	* src/build/create-makefileam.sh: auto-generating Makefile.am from the source directory
+
 2015-02-03	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/kerbalpodcast-dl.sh: script for auto-downloading the latest kerbal podcast
