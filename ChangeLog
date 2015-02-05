@@ -4,6 +4,7 @@
 
 	* configure.ac: auto-generated with src/build/create-configureac.sh
 	--enable-FEATURE/--disable-FEATURE for every src subdirectory added
+	enable/disable options: formatting as proper help strings
 
 	* .gitignore: COPYING added
 
@@ -13,6 +14,7 @@
 	* src/: source files reorganized into selectable features (./configure --enable-FEATURE)
 
 	* src/build/create-configureac.sh: auto-generating configure.ac from the source directory
+	enable/disable options: formatting as proper help strings
 
 	* src/build/create-makefileam.sh: auto-generating Makefile.am from the source directory
 

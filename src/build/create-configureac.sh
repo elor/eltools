@@ -20,11 +20,15 @@ defaultvalue(){
     fi
 }
 
+formatenabledisable(){
+    echo "AS_HELP_STRING([$1], [$2])"
+}
+
 writeenabledisable(){
     if isdefault $1; then
-        echo "--disable-$basedir    Do not install $basedir scripts"
+        formatenabledisable --disable-$basedir "Exclude $basedir scripts"
     else
-        echo "--enable-$basedir    Install $basedir scripts"
+        formatenabledisable --enable-$basedir "Include $basedir scripts"
     fi
 }
 
@@ -34,7 +38,7 @@ writesubdir(){
     basedir_cap=$(capitalize $basedir)
     cat <<EOF
 AC_ARG_ENABLE([$basedir],
-[  $(writeenabledisable $basedir)],
+$(writeenabledisable $basedir),
 [case "\${enableval}" in
   yes) $basedir=true ;;
   no) $basedir=false ;;
