@@ -74,15 +74,6 @@ AC_ARG_ENABLE([arch],
 esac],[arch=false])
 AM_CONDITIONAL([HAVE_ARCH], [test x$arch = xtrue])
 
-AC_ARG_ENABLE([mounting],
-[  --disable-mounting    Do not install mounting scripts],
-[case "${enableval}" in
-  yes) mounting=true ;;
-  no) mounting=false ;;
-  *) AC_MSG_ERROR([bad value ${enableval} for --enable-debug]) ;;
-esac],[mounting=true])
-AM_CONDITIONAL([HAVE_MOUNTING], [test x$mounting = xtrue])
-
 AC_ARG_ENABLE([download],
 [  --disable-download    Do not install download scripts],
 [case "${enableval}" in
@@ -91,5 +82,14 @@ AC_ARG_ENABLE([download],
   *) AC_MSG_ERROR([bad value ${enableval} for --enable-debug]) ;;
 esac],[download=true])
 AM_CONDITIONAL([HAVE_DOWNLOAD], [test x$download = xtrue])
+
+AC_ARG_ENABLE([mount],
+[  --disable-mount    Do not install mount scripts],
+[case "${enableval}" in
+  yes) mount=true ;;
+  no) mount=false ;;
+  *) AC_MSG_ERROR([bad value ${enableval} for --enable-debug]) ;;
+esac],[mount=true])
+AM_CONDITIONAL([HAVE_MOUNT], [test x$mount = xtrue])
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

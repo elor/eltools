@@ -15,7 +15,7 @@ dist_bin_SCRIPTS += src/bash/findport.sh src/bash/queue.sh src/bash/time.sh src/
 endif
 
 if HAVE_BUILD
-dist_bin_SCRIPTS += src/build/create-makefileam.sh
+dist_bin_SCRIPTS += src/build/create-makefileam.sh src/build/create-configureac.sh
 endif
 
 if HAVE_GIT
@@ -34,11 +34,11 @@ if HAVE_ARCH
 dist_bin_SCRIPTS += src/arch/pacman-disowned.sh
 endif
 
-if HAVE_MOUNTING
-dist_bin_SCRIPTS += src/mounting/mountasuser.sh
-endif
-
 if HAVE_DOWNLOAD
 dist_bin_SCRIPTS += src/download/kerbalpodcast-dl.sh
+endif
+
+if HAVE_MOUNT
+dist_bin_SCRIPTS += src/mount/mountasuser.sh
 endif
 

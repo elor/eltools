@@ -3,7 +3,7 @@
 # writes a makefile for scripts from the src directory structure
 
 writescriptfiles(){
-    local files=`find src -maxdepth 1 -type f | xargs`
+    local files=`find src -maxdepth 1 -type f -not -name 'default.txt' | xargs`
     cat <<EOF
 dist_bin_SCRIPTS = $files
 

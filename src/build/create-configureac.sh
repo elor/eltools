@@ -9,7 +9,7 @@ capitalize(){
 }
 
 isdefault(){
-    grep $1 <<< "$enabled" &>/dev/null
+    grep $1 src/default.txt &>/dev/null
 }
 
 defaultvalue(){
