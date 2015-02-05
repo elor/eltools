@@ -18,6 +18,8 @@
 
 	* src/build/create-makefileam.sh: auto-generating Makefile.am from the source directory
 
+	* src/git/pullall.sh: centering the directory names using printf/bash magic
+
 2015-02-03	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/kerbalpodcast-dl.sh: script for auto-downloading the latest kerbal podcast
