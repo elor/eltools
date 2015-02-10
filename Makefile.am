@@ -39,6 +39,6 @@ dist_bin_SCRIPTS += src/download/kerbalpodcast-dl.sh
 endif
 
 if HAVE_MOUNT
-dist_bin_SCRIPTS += src/mount/mountasuser.sh
+dist_bin_SCRIPTS += src/mount/mountasuser.sh src/mount/umountasuser.sh
 endif
 
