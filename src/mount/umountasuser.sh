@@ -20,8 +20,40 @@ EOF
     exit 0
 }
 
+defaultdevice(){
+    mounted=$(mount)
+    links=$(find * -maxdepth 0 -type l | while read link; do
+        if grep "$(readlink "$link")" <<< "$mounted" >/dev/null; then
+            echo "$link"
+        fi
+    done)
+
+    case $(echo "$links" | wc -w) in
+        0)
+            cat >&2 <<EOF
+No links to mounted devices in this directory
+
+See $0 --help for more information
+EOF
+            ;;
+        1)
+            echo $links
+            return 0
+            ;;
+        '')
+            echo "Unexpected error when looking for default device">&2
+            return 1
+            ;;
+        *)
+            echo "multiple linked mounts in this directory. Please specify one">&2
+            return 1
+    esac
+    return 1
+}
+
 link="$1"
-[ -z "$link" ] && printhelp
+[ -z "$link" ] && link=$(defaultdevice)
+[ -z "$link" ] && exit 1
 [ "$link" == "--help" ] && printhelp
 [ "$link" == "-help" ] && printhelp
 [ "$link" == "-h" ] && printhelp
