@@ -33,8 +33,8 @@ if grep -q "$thischange" <<< "$input"; then
     current="`sed -n "/$thischange/,/^[0-9]\{4\}-[0-9][0-9]-[0-9][0-9]\s/ p" <<< "$input" | sed -e '$d'`
 "
     while IFS= read file; do
-        if grep -q "$file" <<< "$current"; then
-            current=$(sed "/`sed 's/\//\\\\\//g' <<< "$file"`/,/^\s*$/ { /^\s*$/i\
+        if grep -q "\* $file:" <<< "$current"; then
+            current=$(sed "/\* `sed 's/\//\\\\\//g' <<< "$file"`:/,/^\s*$/ { /^\s*$/i\
 \\\t
  }" <<< "$current")
         else
