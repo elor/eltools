@@ -20,14 +20,17 @@ if [ "`echo */.git`" != "*/.git" ]; then
     for dir in */.git; do
         (
             echo "=====     $PWD/`dirname "$dir"`    ====="
-            cd "`dirname "$dir"`" && {
+            cd "`dirname "$dir"`" || error=true
+            if [ -n "`git remote`" ]; then
                 git pull --ff-only --all
                 for remote in `git remote`; do
                     echo "=====     `dirname "$dir"` ($remote)     ====="
                     git push --all $remote || error=true
                     git push $remote master --tags || error=true
                 done
-            }
+            else
+                echo "no git remotes found"
+            fi
         )
     done
 fi

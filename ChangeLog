@@ -1,6 +1,7 @@
 2015-03-10	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/git/pushall.sh: pulling before pushing
+	informing about remoteless repositories
 
 2015-03-04	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
