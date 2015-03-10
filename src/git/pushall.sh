@@ -21,6 +21,7 @@ if [ "`echo */.git`" != "*/.git" ]; then
         (
             echo "=====     $PWD/`dirname "$dir"`    ====="
             cd "`dirname "$dir"`" && {
+                git pull --ff-only --all
                 for remote in `git remote`; do
                     echo "=====     `dirname "$dir"` ($remote)     ====="
                     git push --all $remote || error=true
