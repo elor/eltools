@@ -31,13 +31,20 @@ checkbattery(){
 
     [ -z "$timeleft" ] && return # not discharging. Must be plugged in.
 
-    timeleft_minutes=$(grep -Po '[0-9]+(\.[0-9]*)' <<<"$timeleft")
+    timeleft_minutes=$(grep -Po '[0-9]+(\.[0-9]*)\s*minutes' <<<"$timeleft" || sed -r 's/[a-z]+//') || :
+    timeleft_seconds=$(grep -Po '[0-9]+(\.[0-9]*)\s*seconds' <<<"$timeleft" || sed -r 's/[a-z]+//') || :
 
-    [ -z "$timeleft_minutes" ] && return; # formatting error.
-    # I will know that something is wrong when the pc shuts down spontaneously
+    if [ -n "$timeleft_minutes" ]; then
+        echo "bc <<< $timeleft_minutes < $tolerance"
 
-    if [ $(bc <<< "$timeleft_minutes < $tolerance ") == 1 ]; then
+        if [ "$(bc <<< "$timeleft_minutes < $tolerance ")" == 1 ]; then
+            showwarning "$timeleft"
+        fi
+    elif [ -n "$timeleft_seconds" ] ; then
         showwarning "$timeleft"
+    else
+        # hours or days... nothing to worry about
+        :
     fi
 }
 
