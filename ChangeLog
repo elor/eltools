@@ -2,6 +2,8 @@
 
 	* src/interactive/i3-batterycheck.sh: battery-nagbar service added
 	hours, minutes, seconds... upower sucks
+	fixed some pipes
+	hiding the nagbar after laptop has been plugged in
 
 2015-03-10	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
