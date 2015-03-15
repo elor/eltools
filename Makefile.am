@@ -15,7 +15,7 @@ dist_bin_SCRIPTS += src/pdflatex/rebuildlatex.sh src/pdflatex/countcolorpages.sh
 endif
 
 if HAVE_INTERACTIVE
-dist_bin_SCRIPTS += src/interactive/watchscroll.sh src/interactive/screenshot.sh src/interactive/battery.sh src/interactive/progress.sh src/interactive/onchange.sh
+dist_bin_SCRIPTS += src/interactive/watchscroll.sh src/interactive/screenshot.sh src/interactive/battery.sh src/interactive/progress.sh src/interactive/onchange.sh src/interactive/i3-batterycheck.sh
 endif
 
 if HAVE_MOUNT

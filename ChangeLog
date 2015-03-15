@@ -1,3 +1,7 @@
+2015-03-15	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/interactive/i3-batterycheck.sh: battery-nagbar service added
+
 2015-03-10	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/git/pushall.sh: pulling before pushing
