@@ -14,6 +14,7 @@ alldata=$(upower -i "$battery")
 [ -n "$alldata" ] || { echo "cannot read battery information">&2; exit 1; }
 
 grep 'state:' <<< "$alldata" || :
-grep 'rate:' <<< "$alldata" || :
-grep 'capacity:' <<< "$alldata" || :
+grep 'percentage:' <<< "$alldata" || :
+grep 'energy:' <<< "$alldata" || :
+grep 'energy-rate:' <<< "$alldata" || :
 grep 'time' <<< "$alldata" || :

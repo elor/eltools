@@ -1,3 +1,7 @@
+2015-04-12	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/interactive/battery.sh: only showing useful values
+
 2015-03-15	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/interactive/i3-batterycheck.sh: battery-nagbar service added
