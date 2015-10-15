@@ -6,15 +6,20 @@ set -e -u
 
 which upower &>/dev/null
 
-battery=$(upower -e | grep -i battery | head -1)
+batteries=$(upower -e | grep -i battery)
 
-[ -n "$battery" ] || { echo "no battery found">&2 ; exit 1; }
+[ -n "$batteries" ] || { echo "no battery found">&2 ; exit 1; }
 
-alldata=$(upower -i "$battery")
-[ -n "$alldata" ] || { echo "cannot read battery information">&2; exit 1; }
+for battery in $batteries; do
+    alldata=$(upower -i "$battery")
+    [ -n "$alldata" ] || { echo "cannot read battery information">&2; continue; }
 
-grep 'state:' <<< "$alldata" || :
-grep 'percentage:' <<< "$alldata" || :
-grep 'energy:' <<< "$alldata" || :
-grep 'energy-rate:' <<< "$alldata" || :
-grep 'time' <<< "$alldata" || :
+    state=$(grep 'state:' <<< "$alldata" | sed 's/^.*:\s*\(.*\S\)\s*$/\1/')
+    percentage=$(grep 'percentage:' <<< "$alldata" | sed 's/^.*:\s*\(.*\S\)\s*$/\1/')
+    time=$(grep 'time' <<< "$alldata" | sed -e 's/^.*:\s*\(.*\S\)\s*$/\1/' -e 's/\s\s*/###/g')
+
+    shortname=$(basename $battery)
+
+    echo $shortname $state $percentage $time
+
+done | column -t | sed 's/###/ /'
