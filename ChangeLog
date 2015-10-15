@@ -3,6 +3,7 @@
 	* src/interactive/battery.sh: compatible with multiple batteries
 	tabular output
 	no energy flow rates etc.
+	printing rate too
 
 2015-05-07	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 

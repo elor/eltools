@@ -16,10 +16,11 @@ for battery in $batteries; do
 
     state=$(grep 'state:' <<< "$alldata" | sed 's/^.*:\s*\(.*\S\)\s*$/\1/')
     percentage=$(grep 'percentage:' <<< "$alldata" | sed 's/^.*:\s*\(.*\S\)\s*$/\1/')
-    time=$(grep 'time' <<< "$alldata" | sed -e 's/^.*:\s*\(.*\S\)\s*$/\1/' -e 's/\s\s*/###/g')
+    rate=$(grep 'rate:' <<< "$alldata" | sed -e 's/^.*:\s*\(.*\S\)\s*$/\1/' -e 's/\s\s*/#/g')
+    time=$(grep 'time' <<< "$alldata" | sed -e 's/^.*:\s*\(.*\S\)\s*$/\1/' -e 's/\s\s*/#/g')
 
     shortname=$(basename $battery)
 
-    echo $shortname $state $percentage $time
+    echo $shortname $state $percentage $rate $time
 
-done | column -t | sed 's/###/ /'
+done | column -t | sed 's/#/ /g'
