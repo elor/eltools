@@ -14,11 +14,19 @@ for dir in */;do
     (
         cd "$dir" && {
             center `basename "$dir"`
-	          branches=`git for-each-ref --shell --format='%(refname)' refs/heads/ | sed "s/'refs\/heads\/\(.*\)'/\1/"`
-	          for branch in $branches; do
-		            git checkout $branch >/dev/null
-		            git pull --ff-only --all >/dev/null
-	          done
+            branches=`git for-each-ref --shell --format='%(refname)' refs/heads/ | sed "s/'refs\/heads\/\(.*\)'/\1/"
+`
+            git fetch --all
+            for branch in $branches; do
+                for remote in $(git remote); do
+                    if [ "$(git rev-parse $branch)" != "$(git rev-parse $remote/$branch)" ]; then
+                        git checkout $branch >/dev/null
+                        git merge --ff-only $remote/$branch
+                    else
+                        echo "already up-to-date with $remote/$branch"
+                    fi
+                done
+            done
         }
     )
 done

@@ -1,3 +1,7 @@
+2015-11-10	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/git/pullall.sh: ff-merging from all remotes into all branches
+
 2015-10-15	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/interactive/battery.sh: compatible with multiple batteries
