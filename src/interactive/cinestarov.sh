@@ -11,7 +11,7 @@ text=$(curl -s "$url")
 
 moviecolumn=$(echo -ne "$text" | sed -e 's/</\n</g' | sed -e '/<script/,/<\/script>/d' -e '/class="content_col_right"/,$d' -e '/^\s*$/d' -e '1,/id="main_content_full"/d')
 
-rawmoviedata=$(echo -ne "$moviecolumn" | grep -o '<a href="[^"]*/veranstaltungen/[^"]*" title="[^"]*"\|Vorstellung .*\|datetime="[^"]*"' | sed -e 's/datetime="\([^"]*\)"/\1/' -e 's/<a href="\([^"]*\)" title="\([^"]*\)"/\2\n\1/')
+rawmoviedata=$(echo -ne "$moviecolumn" | grep -o '<a href="[^"]*/\(veranstaltungen\|filmprogramm\)/[^"]*" title="[^"]*"\|\(Vorstellung\|Screening\) .*\|datetime="[^"]*"' | sed -e 's/datetime="\([^"]*\)"/\1/' -e 's/<a href="\([^"]*\)" title="\([^"]*\)"/\2\n\1/')
 
 movies=$(echo -e "$rawmoviedata" | while IFS= read line; do
         if [ "${line:0:1}" == '/' ]; then

@@ -1,6 +1,7 @@
 2016-01-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/interactive/cinestarov.sh: urls added/corrected
+	didn't register regular movies, which aren't special OV-only screenings
 
 2016-01-04	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
