@@ -14,11 +14,17 @@ moviecolumn=$(echo -ne "$text" | sed -e 's/</\n</g' | sed -e '/<script/,/<\/scri
 rawmoviedata=$(echo -ne "$moviecolumn" | grep -o '<a href="[^"]*/veranstaltungen/[^"]*" title="[^"]*"\|Vorstellung .*\|datetime="[^"]*"' | sed -e 's/datetime="\([^"]*\)"/\1/' -e 's/<a href="\([^"]*\)" title="\([^"]*\)"/\2\n\1/')
 
 movies=$(echo -e "$rawmoviedata" | while IFS= read line; do
-        echo "$line"
+        if [ "${line:0:1}" == '/' ]; then
+            echo "$baseurl$line"
+        else
+            echo "$line"
+        fi
         grep '^Vorstellung' <<< "$line\n" &>/dev/null && echo "\n"
 done | recode html)
 
 echo -ne "$movies"
 
-#sed -e 'N;s/"\n/: /' -e 's/.*"//g'
+cat <<EOF
 
+Alle OV-Vorstellungen: $url
+EOF
