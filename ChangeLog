@@ -1,3 +1,7 @@
+2016-01-14	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
+
+	* src/interactive/cinestarov.sh: GMail obviously interprets line endings as parts of a URL
+
 2016-01-05	Erik E. Lorenz	<erik.e.lorenz@gmail.com>
 
 	* src/interactive/cinestarov.sh: urls added/corrected

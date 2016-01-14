@@ -15,7 +15,7 @@ rawmoviedata=$(echo -ne "$moviecolumn" | grep -o '<a href="[^"]*/\(veranstaltung
 
 movies=$(echo -e "$rawmoviedata" | while IFS= read line; do
         if [ "${line:0:1}" == '/' ]; then
-            echo "$baseurl$line"
+            echo "<$baseurl$line>"
         else
             echo "$line"
         fi
@@ -26,5 +26,7 @@ echo -ne "$movies"
 
 cat <<EOF
 
-Alle OV-Vorstellungen: $url
+
+Alle OV-Vorstellungen:
+$url
 EOF
